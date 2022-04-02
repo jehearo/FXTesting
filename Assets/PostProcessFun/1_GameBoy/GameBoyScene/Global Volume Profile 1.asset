@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1428298537440830237
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461dea92c6676344d9dbbab300726994, type: 3}
+  m_Name: GameBoyData
+  m_EditorClassIdentifier: 
+  active: 1
+  bit:
+    m_OverrideState: 1
+    m_Value: 128
+  thickness:
+    m_OverrideState: 1
+    m_Value: 3.27
+  edgecolor:
+    m_OverrideState: 1
+    m_Value: {r: 0.0110359555, g: 0.018018031, b: 0.0754717, a: 1}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: Global Volume Profile 1
+  m_EditorClassIdentifier: 
+  components:
+  - {fileID: -1428298537440830237}
