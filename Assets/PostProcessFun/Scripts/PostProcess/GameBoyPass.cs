@@ -35,6 +35,8 @@ public class GameBoyPass : ScriptableRenderPass
             public static readonly int _BitAmount = Shader.PropertyToID("_BitAmount");
             public static readonly int _Thickness = Shader.PropertyToID("_Thickness");
             public static readonly int _EdgeColor = Shader.PropertyToID("_EdgeColor");
+            public static readonly int _LumaAdd = Shader.PropertyToID("_LumaAdd");
+            public static readonly int _SobelStep = Shader.PropertyToID("_SobelStep");
         }
 
         public void Setup(RenderTargetIdentifier source, RenderTargetHandle destination) {
@@ -51,14 +53,15 @@ public class GameBoyPass : ScriptableRenderPass
             RenderTextureDescriptor opaqueDesc = renderingData.cameraData.cameraTargetDescriptor;
             opaqueDesc.width = camera.scaledPixelWidth;
             opaqueDesc.height = camera.scaledPixelHeight;
-            opaqueDesc.colorFormat = RenderTextureFormat.DefaultHDR;
+            opaqueDesc.colorFormat = RenderTextureFormat.Default;
             opaqueDesc.depthBufferBits = 16;
             filterMode = FilterMode.Bilinear;
 
             gameBoyMaterial.SetFloat(ShaderConstants._BitAmount, gameBoyData.bit.value);
             gameBoyMaterial.SetFloat(ShaderConstants._Thickness, gameBoyData.thickness.value);
             gameBoyMaterial.SetColor(ShaderConstants._EdgeColor, gameBoyData.edgecolor.value);
- 
+            gameBoyMaterial.SetFloat(ShaderConstants._LumaAdd, gameBoyData.lumaAdd.value);
+            gameBoyMaterial.SetFloat(ShaderConstants._SobelStep, gameBoyData.sobelStep.value);
             // Can't read and write to same color target, use a TemporaryRT
             if (destination == RenderTargetHandle.CameraTarget) {
                 // temporary RT to blit between
@@ -67,8 +70,9 @@ public class GameBoyPass : ScriptableRenderPass
 
                 //Do render passes
                 cmd.Blit(source, m_TemporaryColorTexture1.Identifier(), gameBoyMaterial,0);
-                cmd.Blit(m_TemporaryColorTexture1.Identifier(), m_TemporaryColorTexture2.Identifier(), gameBoyMaterial,1);
-                cmd.Blit(m_TemporaryColorTexture2.Identifier(), source);
+                cmd.Blit(m_TemporaryColorTexture1.Identifier(), m_TemporaryColorTexture2.Identifier(), gameBoyMaterial,2);
+                cmd.Blit(m_TemporaryColorTexture2.Identifier(), m_TemporaryColorTexture1.Identifier(), gameBoyMaterial,1);
+                cmd.Blit(m_TemporaryColorTexture1.Identifier(), source);
             } else {
                 Blit(cmd, source, destination.Identifier(), gameBoyMaterial);
             }

@@ -11,4 +11,8 @@ public class GameBoyData : VolumeComponent
     public ClampedFloatParameter thickness = new ClampedFloatParameter(1.0f, 0.1f, 4.0f);
     [Tooltip("Colour Outline")]
     public ColorParameter edgecolor = new ColorParameter(Color.black);
+    [Tooltip("Thickness Outline")]
+    public ClampedFloatParameter sobelStep = new ClampedFloatParameter(0.001f, 0.00001f, 0.1f);
+    [Tooltip("Add to Luma")]
+    public ClampedFloatParameter lumaAdd = new ClampedFloatParameter(0.0f, 0.0f, 0.5f);
 }

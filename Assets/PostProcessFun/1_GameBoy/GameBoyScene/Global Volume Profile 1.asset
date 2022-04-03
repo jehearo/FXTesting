@@ -15,13 +15,19 @@ MonoBehaviour:
   active: 1
   bit:
     m_OverrideState: 1
-    m_Value: 256
+    m_Value: 377
   thickness:
     m_OverrideState: 1
-    m_Value: 3.27
+    m_Value: 0.81
   edgecolor:
     m_OverrideState: 1
-    m_Value: {r: 0.0110359555, g: 0.018018031, b: 0.0754717, a: 1}
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  sobelStep:
+    m_OverrideState: 1
+    m_Value: 0.003
+  lumaAdd:
+    m_OverrideState: 1
+    m_Value: 0.04
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36,23 +42,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - {fileID: -1428298537440830237}
-  - {fileID: 2699113010854840736}
---- !u!114 &2699113010854840736
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e021b4c809a781e468c2988c016ebbea, type: 3}
-  m_Name: ColorLookup
-  m_EditorClassIdentifier: 
-  active: 1
-  texture:
-    m_OverrideState: 1
-    m_Value: {fileID: 2800000, guid: 2a7f73b4aabbf1c4fa917ba6f32cf49d, type: 3}
-  contribution:
-    m_OverrideState: 0
-    m_Value: 1
