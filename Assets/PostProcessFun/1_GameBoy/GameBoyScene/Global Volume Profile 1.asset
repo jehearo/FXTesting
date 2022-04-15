@@ -15,19 +15,22 @@ MonoBehaviour:
   active: 1
   bit:
     m_OverrideState: 1
-    m_Value: 377
+    m_Value: 622
   thickness:
     m_OverrideState: 1
-    m_Value: 0.81
+    m_Value: 1.58
   edgecolor:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0, b: 0, a: 1}
   sobelStep:
     m_OverrideState: 1
-    m_Value: 0.003
+    m_Value: 0.00045
   lumaAdd:
     m_OverrideState: 1
-    m_Value: 0.04
+    m_Value: 0.074
+  gameBoyFilter:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
