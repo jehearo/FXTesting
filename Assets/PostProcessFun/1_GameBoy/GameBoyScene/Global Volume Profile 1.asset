@@ -1,6 +1,43 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1428298537440830237
+--- !u!114 &-7337784677641586060
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7a9e8dabca723f4189e419dd59a4e92, type: 3}
+  m_Name: KawaseBlurData
+  m_EditorClassIdentifier: 
+  active: 1
+  downsample:
+    m_OverrideState: 1
+    m_Value: 8
+  passes:
+    m_OverrideState: 1
+    m_Value: 8
+  offset:
+    m_OverrideState: 1
+    m_Value: 0.83
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: Global Volume Profile 1
+  m_EditorClassIdentifier: 
+  components:
+  - {fileID: 134870404592652687}
+  - {fileID: -7337784677641586060}
+--- !u!114 &134870404592652687
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15,33 +52,31 @@ MonoBehaviour:
   active: 1
   bit:
     m_OverrideState: 1
-    m_Value: 622
+    m_Value: 507
   thickness:
     m_OverrideState: 1
-    m_Value: 1.58
+    m_Value: 0.89
   edgecolor:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0, b: 0, a: 1}
   sobelStep:
     m_OverrideState: 1
-    m_Value: 0.00045
+    m_Value: 0.00022
   lumaAdd:
     m_OverrideState: 1
-    m_Value: 0.074
+    m_Value: 0.288
   gameBoyFilter:
     m_OverrideState: 1
     m_Value: 0
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: Global Volume Profile 1
-  m_EditorClassIdentifier: 
-  components:
-  - {fileID: -1428298537440830237}
+  lumaBlurMul:
+    m_OverrideState: 1
+    m_Value: 0.313
+  satBlurMul:
+    m_OverrideState: 1
+    m_Value: 0.45
+  lowStep:
+    m_OverrideState: 1
+    m_Value: 0.0102
+  highStep:
+    m_OverrideState: 1
+    m_Value: 0.0162

@@ -40,6 +40,7 @@ public class KawaseBlurPass : ScriptableRenderPass
             this.source = source;
             this.destination = destination;
             var stack = VolumeManager.instance.stack;
+            kawaseBlurData = stack.GetComponent<KawaseBlurData>();
         }
 
         public override void Configure(CommandBuffer cmd, RenderTextureDescriptor cameraTextureDescriptor)
@@ -66,11 +67,11 @@ public class KawaseBlurPass : ScriptableRenderPass
             //set shader constants
             //KawaseBlurMaterial.SetFloat(ShaderConstants._Offset, kawaseBlurData.offset.value);
             
-            cmd.SetGlobalFloat("_offset", 1.5f);
+            KawaseBlurMaterial.SetFloat(ShaderConstants._Offset, kawaseBlurData.offset.value);
             cmd.Blit(source, tmpRT1, KawaseBlurMaterial);
 
             for (var i=1; i<kawaseBlurData.passes.value-1; i++) {
-                cmd.SetGlobalFloat("_offset", 0.5f + i);
+                KawaseBlurMaterial.SetFloat(ShaderConstants._Offset, kawaseBlurData.offset.value -1 + i);
                 cmd.Blit(tmpRT1, tmpRT2, KawaseBlurMaterial);
 
                 // pingpong
@@ -80,7 +81,7 @@ public class KawaseBlurPass : ScriptableRenderPass
             }
 
             // final pass
-            cmd.SetGlobalFloat("_offset", 0.5f + kawaseBlurData.passes.value - 1f);
+            KawaseBlurMaterial.SetFloat(ShaderConstants._Offset, kawaseBlurData.offset.value + kawaseBlurData.passes.value - 2f);
             if (destination == RenderTargetHandle.CameraTarget) {
                 cmd.Blit(tmpRT1, source, KawaseBlurMaterial);
             } else {

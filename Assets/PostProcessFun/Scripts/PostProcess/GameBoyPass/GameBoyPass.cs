@@ -37,6 +37,10 @@ public class GameBoyPass : ScriptableRenderPass
             public static readonly int _EdgeColor = Shader.PropertyToID("_EdgeColor");
             public static readonly int _LumaAdd = Shader.PropertyToID("_LumaAdd");
             public static readonly int _SobelStep = Shader.PropertyToID("_SobelStep");
+            public static readonly int _LumaBlurMul = Shader.PropertyToID("_LumaBlurMul");
+            public static readonly int _SatBlurMul = Shader.PropertyToID("_SatBlurMul");
+            public static readonly int _lowStep = Shader.PropertyToID("_lowStep");
+            public static readonly int _highStep = Shader.PropertyToID("_highStep");
         }
 
         public void Setup(RenderTargetIdentifier source, RenderTargetHandle destination) {
@@ -62,6 +66,10 @@ public class GameBoyPass : ScriptableRenderPass
             gameBoyMaterial.SetColor(ShaderConstants._EdgeColor, gameBoyData.edgecolor.value);
             gameBoyMaterial.SetFloat(ShaderConstants._LumaAdd, gameBoyData.lumaAdd.value);
             gameBoyMaterial.SetFloat(ShaderConstants._SobelStep, gameBoyData.sobelStep.value);
+            gameBoyMaterial.SetFloat(ShaderConstants._LumaBlurMul, gameBoyData.lumaBlurMul.value);
+            gameBoyMaterial.SetFloat(ShaderConstants._SatBlurMul, gameBoyData.satBlurMul.value);
+            gameBoyMaterial.SetFloat(ShaderConstants._lowStep, gameBoyData.lowStep.value);
+            gameBoyMaterial.SetFloat(ShaderConstants._highStep, gameBoyData.highStep.value);
             // Can't read and write to same color target, use a TemporaryRT
             if (destination == RenderTargetHandle.CameraTarget) {
                 

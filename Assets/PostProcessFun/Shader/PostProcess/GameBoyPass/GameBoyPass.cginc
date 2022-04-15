@@ -3,6 +3,7 @@
 
 #include "UnityCG.cginc"
 #include "Assets/PostProcessFun/Shader/Common/Sobel.cginc"
+#include "Assets/PostProcessFun/Shader/Common/ColorFunctions.cginc"
 
 struct appdata
             {
@@ -21,6 +22,7 @@ struct appdata
             sampler2D _CameraDepthTexture;
             sampler2D _PixelTex;
             sampler2D _NormalPassTexture;
+            sampler2D _KawaseBlurPassTexture;
             float4 _MainTex_TexelSize;
             float _BitAmount;
             
@@ -31,6 +33,10 @@ struct appdata
             float _LumaAdd;
             float _SobelStep;
             float4 _Darkest, _Dark, _Ligt, _Ligtest;
+            float _LumaBlurMul;
+            float _SatBlurMul;
+            float _lowStep;
+            float _highStep;
             CBUFFER_END
 
             v2f vert (appdata v)
@@ -45,16 +51,22 @@ struct appdata
             fixed4 sobel_frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
-                //do blur for colour sampling 
+                fixed4 depthTemp = 1-Linear01Depth(tex2D(_CameraDepthTexture,i.uv));
+                depthTemp = smoothstep(0.975,1, depthTemp);
+                
+                //Do Sobel Filtering
+                float3 edge = smoothstep(_SobelStep-0.0001,_SobelStep,sobelDepth(i.uv, _CameraDepthTexture, _MainTex_TexelSize.xy*_Thickness)); 
+                fixed4 normal = tex2D(_NormalPassTexture,i.uv);
+                float dotNormal = smoothstep(_lowStep,_highStep,1-abs(dot(normal.xyz, float3(0,0,1))));
+                float closeNormal = dotNormal*depthTemp;
                 
 
-                //Do Sobel Filtering
-                float3 edge = step(_SobelStep,sobelDepth(i.uv, _CameraDepthTexture, _MainTex_TexelSize.xy*_Thickness)); 
-                fixed4 normal = tex2D(_NormalPassTexture,i.uv);
-                float dotNormal = step(0.1,1-abs(dot(normal.xyz, float3(0,0,1))));
-                col.rgb = lerp(col.rgb, _EdgeColor, edge*dotNormal);
-                
-                
+                //do blur for colour sampling 
+                fixed4 blur = tex2D(_KawaseBlurPassTexture,i.uv);
+                float3 hue = hueMode(blur.rgb, _LumaBlurMul, _SatBlurMul);
+
+                col.rgb = lerp(col.rgb, hue, edge*closeNormal);
+                col.rgb = lerp (col.rgb, hue, edge*dotNormal*step(0.95,1-depthTemp));
                 
                 return float4(col.rgb,1);
             }

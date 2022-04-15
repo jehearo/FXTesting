@@ -17,4 +17,12 @@ public class GameBoyData : VolumeComponent
     public ClampedFloatParameter lumaAdd = new ClampedFloatParameter(0.0f, 0.0f, 0.5f);
     [Tooltip("Enable Gameboy Colour")]
     public BoolParameter gameBoyFilter = new BoolParameter(false);
+    [Tooltip("Multiply to Luma For Outline")]
+    public ClampedFloatParameter lumaBlurMul = new ClampedFloatParameter(1.0f, 0.0f, 1.0f);
+    [Tooltip("Multiply to Saturation For Outline")]
+    public ClampedFloatParameter satBlurMul = new ClampedFloatParameter(1.0f, 0.0f, 1.0f);
+    [Tooltip("Thickness Control Low")]
+    public ClampedFloatParameter lowStep = new ClampedFloatParameter(0.0f, 0.0f, 0.1f);
+    [Tooltip("Thickness Control High")]
+    public ClampedFloatParameter highStep = new ClampedFloatParameter(0.1f, 0.0001f, 0.1f);
 }

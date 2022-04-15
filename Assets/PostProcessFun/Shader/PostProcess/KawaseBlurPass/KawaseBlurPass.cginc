@@ -19,10 +19,10 @@ struct appdata
             sampler2D _MainTex;
             float4 _MainTex_TexelSize;
             float4 _MainTex_ST;
-            
+            float _Offset;
             CBUFFER_START(UnityPerMaterial)
             //Add custom parameters
-            float _Offset;
+            
             CBUFFER_END
 
             v2f vert (appdata v)

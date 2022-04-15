@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-[Serializable, VolumeComponentMenu("Post Process/Game Boy Feature")]
+[Serializable, VolumeComponentMenu("Post Process/Kawase Blur Feature")]
 public class KawaseBlurData : VolumeComponent
 {
     [Tooltip("Downsample Amount")]
